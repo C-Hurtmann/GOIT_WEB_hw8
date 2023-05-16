@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "goit-web-hw8"
+version = "0.1.0"
+description = ""
+authors = ["C-Hurtmann <constantine2903@gmail.com>"]
+readme = "README.md"
+packages = [{include = "goit_web_hw8"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pymongo = "3.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

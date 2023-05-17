@@ -1,4 +1,0 @@
-username:
-MyFirstNoSQL
-password:
-ntHy7sqToUuaSiDv

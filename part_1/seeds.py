@@ -13,8 +13,8 @@ def fetch_data_from_json(path: Path) -> list[dict]:
     return data
 
 def main():
-    authors_json = fetch_data_from_json(Path('part_1/authors.json'))
-    quotes_json = fetch_data_from_json(Path('part_1/quotes.json'))
+    authors_json = fetch_data_from_json(Path('part_1/jsons/authors.json'))
+    quotes_json = fetch_data_from_json(Path('part_1/jsons/quotes.json'))
     Authors.objects().delete()
     for i in authors_json:
         date = datetime.strptime(i['born_date'], '%B %d, %Y')

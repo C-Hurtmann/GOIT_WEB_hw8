@@ -1,6 +1,5 @@
 from datetime import datetime
 from pathlib import Path
-from pprint import pprint
 import json
 
 import connection

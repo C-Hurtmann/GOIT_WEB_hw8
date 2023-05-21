@@ -17,8 +17,6 @@ class Quotes(Document):
     quote = StringField()
 
     def __str__(self):
-        return f'{self.author} | {self.tags} | {self.quote[:20]}...\n'
-
-
+        return f'{self.quote}\n(c) {self.author}'
 
 

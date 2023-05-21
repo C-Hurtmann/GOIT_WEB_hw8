@@ -9,7 +9,7 @@ from models import Quotes, Authors
 client = StrictRedis(host='localhost', port=6379, password=None)
 cache = RedisLRU(client)
 
-@cache()
+@cache(ttl=3600)
 def get_mongo_keys():
     notes = []
     authors = set()
@@ -22,7 +22,7 @@ def confirm_key(key, keys):
     pattern = re.compile(fr'{key}.*')
     return filter(lambda x: re.match(pattern, x), keys)
 
-@cache
+@cache(ttl=3600)
 def execute_query(command: str, value: str):
     notes, authors = get_mongo_keys()
     if command == 'name':
@@ -38,20 +38,21 @@ def execute_query(command: str, value: str):
     return result
 
 def main():
-    n = 0
-    while n < 3:
+    while True:
         stop_word = 'exit'
-        if n == 0:
-            query = 'name:St'.split(':')
-        elif n == 1:
-            query = 'tag:li'.split(':')
-        elif n == 2:
-            query = 'tag:li,chan'.split(':')        
-        result = execute_query(*query)
-        for i in result:
-            print(i)
-        print('-' * 80)
-        n += 1
+        query = input('> ')
+        if query in stop_word:
+            break
+        query = query.split(':')
+        try:   
+            result = execute_query(*query)
+        except:
+            print('search by pattern command:value\nSuch as name:Steve Martin or tag:life,live')
+        else:
+            for i in result:
+                print(i)
+            print('-' * 80)
+
 
 if __name__ =='__main__':
     main()
